@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsPositive } from 'class-validator';
 import { Categoria } from 'src/categoria/entities/categoria.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -20,11 +20,13 @@ export class Produto {
   fabricante: string;
 
   @IsNotEmpty()
+  @IsPositive()
   @Column('decimal', { precision: 10, scale: 2 })
   preco: number;
 
   @IsNotEmpty()
   @Column('int')
+  @IsPositive()
   quantidade_estoque: number;
 
   @ManyToOne(() => Categoria, (categoria) => categoria.produto, {
